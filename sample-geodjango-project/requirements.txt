@@ -7,3 +7,4 @@ pep8==1.6.2
 pyflakes==1.0.0
 pygeocoder==1.2.5
 requests==2.7.0
+psycopg2==2.6.1
