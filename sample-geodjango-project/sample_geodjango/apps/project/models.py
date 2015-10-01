@@ -7,6 +7,16 @@ from django_extensions.db.models import TimeStampedModel
 import geocoder
 
 
+class Neighborhood(models.Model):
+    name = models.CharField(max_length=100)
+    area = models.IntegerField()
+    poly = models.PolygonField()
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+        return self.name
+
+
 class CallType(TimeStampedModel):
 
     name = models.CharField(max_length=50)
