@@ -1,13 +1,12 @@
 from django.contrib.gis import admin
-from .models import FruitLocation, FruitType
+from .models import CallLocation, CallType
 
 
-class FruitLocationAdmin(admin.OSMGeoAdmin):
+class GeoLocationAdmin(admin.OSMGeoAdmin):
     default_zoom = 11
     list_display = (
-        'fruit_type', 'address',
+        'call_type', 'address',
         'modified',)
 
-
-admin.site.register(FruitLocation, FruitLocationAdmin)
-admin.site.register(FruitType)
+admin.site.register(CallLocation, GeoLocationAdmin)
+admin.site.register(CallType)

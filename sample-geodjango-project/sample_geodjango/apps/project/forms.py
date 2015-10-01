@@ -1,14 +1,14 @@
 from django import forms
 
-from .models import FruitLocation
+from .models import CallLocation
 
 
-class FruitLocationForm(forms.ModelForm):
+class CallLocationForm(forms.ModelForm):
 
     class Meta:
-        model = FruitLocation
+        model = CallLocation
         fields = (
             'address',
-            'fruit_type',
+            'call_type',
             'comment'
         )
