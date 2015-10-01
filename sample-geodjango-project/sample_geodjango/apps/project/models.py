@@ -1,56 +1,58 @@
 import sys
 
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import fromstr
 from django_extensions.db.models import TimeStampedModel
 
-from pygeocoder import Geocoder
+import geocoder
 
 
-class FruitType(TimeStampedModel):
+class CallType(TimeStampedModel):
 
     name = models.CharField(max_length=50)
 
     class Meta:
         ordering = ['-modified']
-        verbose_name_plural = "Fruit Types"
+        verbose_name_plural = "Call Types"
 
     # Returns the string representation of the model.
     def __unicode__(self):
         return '%s' % (self.name)
 
 
-class FruitLocation(TimeStampedModel):
+class CallLocation(TimeStampedModel):
 
     address = models.CharField(
-        max_length=50)
+        max_length=255)
     comment = models.TextField(
         blank=True, null=True)
-    fruit_type = models.ForeignKey(FruitType)
-    latitude = models.DecimalField(
-        max_digits=10, decimal_places=7,
-        blank=True, null=True)
-    longitude = models.DecimalField(
-        max_digits=10, decimal_places=7,
-        blank=True, null=True)
+    call_type = models.ForeignKey(CallType, blank=True, null=True)
+
+    # GeoDjango-specific: a geometry field (PointField), and
+    # overriding the default manager with a GeoManager instance.
+    location = models.PointField()
+    objects = models.GeoManager()
 
     class Meta:
         ordering = ['-modified']
-        verbose_name_plural = "Fruit Locations"
+        verbose_name_plural = "Emergency Call Locations"
 
     def save(self, *args, **kwargs):
+        # if self.pk is None:
         try:
             # get the geocoding results
-            results = Geocoder.geocode(self.address)
-            # correct the address spelling
-            self.address = results[0].formatted_address.encode('utf-8')
-            self.latitude = results[0].coordinates[0]
-            self.longitude = results[0].coordinates[1]
-        except Exception:
+            result = geocoder.google(self.address)
+            # correct the address spelling by using the normalized address
+            self.address = result.address.encode('utf-8')
+            self.location = fromstr(
+                'POINT(%s %s)' % (result.lng, result.lat),
+                srid=4326)
+        except (AttributeError, Exception):
             print "Oops!  Couldn't geocode address because of %s" \
                 % sys.exc_info()[0]
 
-        super(FruitLocation, self).save(*args, **kwargs)
+        super(CallLocation, self).save(*args, **kwargs)
 
     # Returns the string representation of the model.
     def __unicode__(self):
-        return '%s tree at %s' % (self.fruit_type, self.address)
+        return '%s call from %s' % (self.call_type, self.address)
