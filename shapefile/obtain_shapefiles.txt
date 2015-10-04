@@ -1,0 +1,14 @@
+
+# Install the gis stack (geos, proj4, postgres, postgis, gdal)
+$ brew install postgis gdal
+
+# Clone the Portland Atlas
+$ git clone https://github.com/Caged/portland-atlas.git
+
+$ cd portland-atlas/
+$ make shp/neighborhoods.shp
+
+# Check structure
+$ ogrinfo -al -geom=OFF shp/neighborhoods.shp
+# Check projection
+$ ogrinfo -so shp/neighborhoods.shp -sql "SELECT * FROM neighborhoods"
