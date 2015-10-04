@@ -10,3 +10,4 @@ requests==2.7.0
 psycopg2==2.6.1
 djangorestframework==3.2.4
 tweepy==3.4.0
+-e git+git@github.com:hanneshapke/pyexif.git@c2cebdc8c63f91a6beaad7725cc80d3d7113c716#egg=pyexif-master
