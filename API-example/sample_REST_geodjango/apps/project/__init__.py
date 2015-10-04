@@ -9,4 +9,4 @@ access_token = environ.get('TWITTER_OAUTH_TOKEN', None)
 if (not consumer_secret or not consumer_key
         or not access_token or not access_token_secret):
     raise ImproperlyConfigured(
-        'Twitter credentials are missing. Please set en.v variables')
+        'Twitter credentials are missing. Please set env variables.')

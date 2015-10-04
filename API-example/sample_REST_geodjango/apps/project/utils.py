@@ -11,11 +11,12 @@ def get_twitter_api():
     return tweepy.API(auth)
 
 
-def get_twitter_feed(username, update_count=100):
+def get_twitter_feed(username, since_id=None, update_count=20):
     """ Retrieves the twitter messages for a given username """
     return get_twitter_api().user_timeline(
         screen_name=username,
-        count=update_count)
+        count=update_count,
+        since_id=since_id)
 
 
 def parse_twitter_status(status):
@@ -32,18 +33,30 @@ def parse_twitter_status(status):
     }
 
 
-def set_call_locations():
+def set_call_locations(username, since_id=None):
     """ save latest downloaded status updates """
     # get last entry
-    last_entry = CallLocation.objects.last()
+    last_entry = CallLocation.objects.first()
     # get latest twitter status updates
-    twitter_msgs = get_twitter_feed('pdxpolicelog')
-    count = 0
-    for msg in twitter_msgs:
-        # save new incidences since last update
-        if not last_entry or msg.id > last_entry.status_id:
+    if hasattr(last_entry, 'status_id'):
+        status_id = last_entry.status_id
+    else:
+        status_id = None
+    try:
+
+        count = 0
+        twitter_msgs = get_twitter_feed(username, status_id)
+        for msg in twitter_msgs:
+            # save new incidences since last update
             obj = CallLocation(**parse_twitter_status(msg))
             obj.save()
             count += 1
+        message = "Added %s new calls to the emergency call register" % count
+        print(message)
+        return message, 200
 
-    print("Added %s new calls to the emergency call register" % count)
+    except tweepy.TweepError:
+        return "Something went really wrong", 500
+
+    except tweepy.RateLimitError:
+        return "Exceeded twitter limit", 500

@@ -36,7 +36,7 @@ class CallLocation(TimeStampedModel):
     objects = models.GeoManager()
 
     class Meta:
-        ordering = ['-modified']
+        ordering = ['-status_id']
         verbose_name_plural = "Emergency Call Locations"
 
     def save(self, *args, **kwargs):

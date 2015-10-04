@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap3',
     'rest_framework',
+    'rest_framework_gis',
     'project',
 )
 
@@ -82,7 +83,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "sample_REST_geodjango/static/"),
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
-    'PAGE_SIZE': 10
+    # 'PAGE_SIZE': 10
 }
