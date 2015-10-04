@@ -9,9 +9,13 @@ import geocoder
 
 class Neighborhood(models.Model):
     name = models.CharField(max_length=100)
-    area = models.IntegerField()
-    poly = models.PolygonField()
+    poly = models.MultiPolygonField()
     objects = models.GeoManager()
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = "Portland Neighborhoods"
+
 
     def __unicode__(self):
         return self.name
