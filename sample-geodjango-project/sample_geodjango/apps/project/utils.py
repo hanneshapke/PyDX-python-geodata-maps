@@ -8,12 +8,14 @@ neighboorhood_mapping = {
 }
 
 neighboorhood_shp = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../../data', 'neighborhoods.shp'))
-print neighboorhood_shp
-print os.path.dirname(__file__)
+    os.path.join(
+        os.path.dirname(__file__),
+        '../../data', 'neighborhoods.shp'))
 
 
 def run(verbose=True):
-    lm = LayerMapping(Neighborhood, neighboorhood_shp, neighboorhood_mapping,
-                      transform=False, encoding='iso-8859-1')
+    lm = LayerMapping(
+        Neighborhood,
+        neighboorhood_shp, neighboorhood_mapping,
+        transform=False, encoding='iso-8859-1')
     lm.save(strict=True, verbose=verbose)
