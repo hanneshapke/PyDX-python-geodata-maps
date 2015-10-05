@@ -16,7 +16,6 @@ class Neighborhood(models.Model):
         ordering = ['name']
         verbose_name_plural = "Portland Neighborhoods"
 
-
     def __unicode__(self):
         return self.name
 
@@ -40,7 +39,8 @@ class CallLocation(TimeStampedModel):
         max_length=255)
     comment = models.TextField(
         blank=True, null=True)
-    call_type = models.ForeignKey(CallType, blank=True, null=True)
+    call_type = models.ForeignKey(
+        CallType, blank=True, null=True)
 
     # GeoDjango-specific: a geometry field (PointField), and
     # overriding the default manager with a GeoManager instance.
@@ -52,7 +52,6 @@ class CallLocation(TimeStampedModel):
         verbose_name_plural = "Emergency Call Locations"
 
     def save(self, *args, **kwargs):
-        # if self.pk is None:
         try:
             # get the geocoding results
             result = geocoder.google(self.address)
