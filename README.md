@@ -16,10 +16,6 @@ Install the following three packages:
 - Geocoder: `pip install -e git+git@github.com:hanneshapke/pyexif.git#egg=pyexif`
 
 # Shapefile example
-
-
-# Sample Django project
-[![Requirements Status](https://requires.io/github/hanneshapke/PyDX-python-geodata-maps/requirements.svg?branch=master)](https://requires.io/github/hanneshapke/PyDX-python-geodata-maps/requirements/?branch=master)
 The folder `shapefile` contains a simple how-to for using the amazing [Portland Atlas by @Caged](https://github.com/caged/portland-atlas)
 
 # GeoDjango Example
@@ -34,7 +30,7 @@ The example demonstrates:
 
 ![Example of the GeoDjango Sample Code](geodjango_example.png)
 
-# API example
+# GeoDjango + REST API example
 This example code deonstrates how to move from a general GeoDjango project to an API endpoint based on the [Django REST Framework](http://www.django-rest-framework.org/)
 
 The example demonstrates:
