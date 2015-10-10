@@ -3,7 +3,7 @@
 (c) Hannes Hapke 2015
 
 # Presentation and video
-I will add the presentation slides and the video once the [PyDX 2015](http://www.pydx.org) is over and the video is uploaded to (pyvideo.org)[http://www.pyvideo.org]
+I will add the presentation slides and the video once the [PyDX 2015](http://www.pydx.org) is over and the video is uploaded to [pyvideo.org)]9(http://www.pyvideo.org)
 
 # Geocoder and other Python examples
 The folder `geocoder` contains four different code samples:
