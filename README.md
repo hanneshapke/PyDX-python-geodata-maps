@@ -3,24 +3,45 @@
 (c) Hannes Hapke 2015
 
 
-# Geocoder example
+# Geocoder and other Python examples
+The folder `geocoder` contains four different code samples:
+- address geocoder example
+- ip address geocoder example
+- generating static map images (street maps, satelitte maps, etc.)
+- extracting geo data from images
+
+Install the following three packages:
+- Geocoder: `pip install geocoder`
+- motionless: `pip install motionless`
+- Geocoder: `pip install -e git+git@github.com:hanneshapke/pyexif.git#egg=pyexif`
 
 # Shapefile example
 
+
 # Sample Django project
 [![Requirements Status](https://requires.io/github/hanneshapke/PyDX-python-geodata-maps/requirements.svg?branch=master)](https://requires.io/github/hanneshapke/PyDX-python-geodata-maps/requirements/?branch=master)
+The folder `shapefile` contains a simple how-to for using the amazing [Portland Atlas by @Caged](https://github.com/caged/portland-atlas)
 
+# GeoDjango Example
+This example code demonstrates how to generate `Points` in GeoDjango/postGIS and how to query them based on GeoDjango queries.
 
-# start postgres.app
+The example demonstrates:
+- Simple GeoModel
+- Demonstrate the GeoDjango Admin
+- How to save Points
+- How to search for Points within a Polygon
+- Leaflet Maps
 
-# How to install PostGIS
-https://docs.djangoproject.com/en/1.8/ref/contrib/gis/install/postgis/
-
-# create database
-$ createdb pydx-geodjango-example
-
-# check postgis extensions
-$ psql -c "SELECT name, default_version,installed_version FROM pg_available_extensions WHERE name LIKE 'postgis%' ;"
-
+![Example of the GeoDjango Sample Code](geodjango_example.png)
 
 # API example
+This example code deonstrates how to move from a general GeoDjango project to an API endpoint based on the [Django REST Framework](http://www.django-rest-framework.org/)
+
+The example demonstrates:
+- Create an API endpoint through the Django REST Framework
+- Download the 20 latest twitter messages by the Portland police
+- Set up a GeoSerializer
+- Demo of AngularJS ng-map
+- Limit the API requests by the boudning box of the client's map (This limits your client/server requests)
+
+![Example of the GeoDjango + REST Sample Code](geodjango_rest_example.png)
